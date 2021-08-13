@@ -15,7 +15,8 @@ describe('Upload Release Asset', () => {
   beforeEach(() => {
     uploadReleaseAsset = jest.fn().mockReturnValueOnce({
       data: {
-        browser_download_url: 'browserDownloadUrl'
+        browser_download_url: 'browserDownloadUrl',
+        url: 'assetDownloadUrl'
       }
     });
 
@@ -71,6 +72,7 @@ describe('Upload Release Asset', () => {
     await run();
 
     expect(core.setOutput).toHaveBeenNthCalledWith(1, 'browser_download_url', 'browserDownloadUrl');
+    expect(core.setOutput).toHaveBeenNthCalledWith(2, 'asset_download_url', 'assetDownloadUrl');
   });
 
   test('Action fails elegantly', async () => {
